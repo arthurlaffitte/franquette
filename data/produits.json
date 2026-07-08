@@ -1,0 +1,98 @@
+[
+  {
+    "id": "vin-tracteur-rouge",
+    "categorie": "vins",
+    "nom": "Tracteur rouge 2023 — Domaine Finot",
+    "nom_en": "Tracteur rouge 2023 — Domaine Finot",
+    "description": "Le rouge de soif du Grésivaudan, servi à nos tables. Fruité, léger, à boire entre amis. Bouteille 75 cl.",
+    "description_en": "The easy-drinking red from Grésivaudan, served at our tables. Fruity, light, to share with friends. 75 cl bottle.",
+    "prix": null,
+    "image": null,
+    "stripe": null,
+    "dispo": true
+  },
+  {
+    "id": "vin-contact-orange",
+    "categorie": "vins",
+    "nom": "Contact 2022 — Domaine du Fief Noir (orange)",
+    "nom_en": "Contact 2022 — Domaine du Fief Noir (orange)",
+    "description": "Notre vin orange de Loire, macération signature de la carte Franquette. Bouteille 75 cl.",
+    "description_en": "Our orange wine from the Loire, the signature maceration of the Franquette list. 75 cl bottle.",
+    "prix": null,
+    "image": null,
+    "stripe": null,
+    "dispo": true
+  },
+  {
+    "id": "ceramique-tasse",
+    "categorie": "ceramique",
+    "nom": "Tasse Franquette — pièce unique",
+    "nom_en": "Franquette cup — unique piece",
+    "description": "Tournée et émaillée à l'atelier de la rue des Dames. Chaque pièce est unique, comme celles qui servent le café au comptoir.",
+    "description_en": "Thrown and glazed at our rue des Dames workshop. Each piece is unique, just like the ones used at the counter.",
+    "prix": null,
+    "image": null,
+    "stripe": null,
+    "dispo": true
+  },
+  {
+    "id": "ceramique-assiette",
+    "categorie": "ceramique",
+    "nom": "Assiette Franquette — pièce unique",
+    "nom_en": "Franquette plate — unique piece",
+    "description": "L'assiette qui accueille les tapas de Clem, façonnée à la main à l'atelier. Pièce unique, petites variations naturelles.",
+    "description_en": "The plate that carries Clem's tapas, hand-shaped at the workshop. Unique piece with natural variations.",
+    "prix": null,
+    "image": null,
+    "stripe": null,
+    "dispo": true
+  },
+  {
+    "id": "huile-olive",
+    "categorie": "huile",
+    "nom": "Huile d'olive d'exception — 50 cl",
+    "nom_en": "Exceptional olive oil — 50 cl",
+    "description": "Sélectionnée chez nos producteurs amis, dans l'esprit bon, propre et juste. Celle qui assaisonne nos assiettes.",
+    "description_en": "Selected from our producer friends, in the good, clean and fair spirit. The one that dresses our plates.",
+    "prix": null,
+    "image": null,
+    "stripe": null,
+    "dispo": true
+  },
+  {
+    "id": "cafe-grains-250",
+    "categorie": "cafe",
+    "nom": "Café en grains d'exception — 250 g",
+    "nom_en": "Exceptional coffee beans — 250 g",
+    "description": "Les grains servis au comptoir, torréfiés par des torréfacteurs de renom. Torréfaction récente, profil méditerranéen.",
+    "description_en": "The beans we serve at the counter, roasted by renowned roasters. Freshly roasted, Mediterranean profile.",
+    "prix": null,
+    "image": null,
+    "stripe": null,
+    "dispo": true
+  },
+  {
+    "id": "cafe-moulu-250",
+    "categorie": "cafe",
+    "nom": "Café moulu d'exception — 250 g",
+    "nom_en": "Exceptional ground coffee — 250 g",
+    "description": "La même sélection que nos grains, moulue pour filtre ou moka. Précisez votre mouture en commentaire de commande.",
+    "description_en": "The same selection as our beans, ground for filter or moka. Specify your grind in the order notes.",
+    "prix": null,
+    "image": null,
+    "stripe": null,
+    "dispo": true
+  },
+  {
+    "id": "bon-cadeau",
+    "categorie": "cadeau",
+    "nom": "Bon cadeau Franquette",
+    "nom_en": "Franquette gift voucher",
+    "description": "Offrez un moment Franquette : tapas, vins nature ou atelier céramique. Disponible dès maintenant en ligne.",
+    "description_en": "Treat someone to a Franquette moment: tapas, natural wines or a ceramics workshop. Available online now.",
+    "prix": null,
+    "image": null,
+    "stripe": "https://uniiti.com/shop/franquette",
+    "dispo": true
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "id": "ouverture-cafe",
+    "date": "2026-07-01",
+    "titre": "Franquette Café ouvre ses portes",
+    "titre_en": "Franquette Café is now open",
+    "texte": "Dès 9h, retrouvez nos cafés de spécialité, le matcha et les sodas UMA au 8 rue des Dames. L'esprit méditerranéen s'installe aux Batignolles.",
+    "texte_en": "From 9am, enjoy our specialty coffees, matcha and UMA sodas at 8 rue des Dames. The Mediterranean spirit has arrived in Batignolles.",
+    "image": null,
+    "lien": null,
+    "lien_texte": null
+  },
+  {
+    "id": "suivez-nous-instagram",
+    "date": "2026-06-15",
+    "titre": "Suivez Franquette sur Instagram",
+    "titre_en": "Follow Franquette on Instagram",
+    "texte": "Les coulisses de la cuisine de Clem, les nouvelles cuvées de la cave et les pièces fraîchement sorties du four céramique : tout est sur notre compte.",
+    "texte_en": "Behind the scenes of Clem's kitchen, new cuvées from the cellar and pieces fresh out of the ceramics kiln: it's all on our account.",
+    "image": null,
+    "lien": "https://www.instagram.com/franquette_paris/",
+    "lien_texte": "Voir le compte"
+  }
+]

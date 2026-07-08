@@ -21,7 +21,7 @@
         <li><a href="cafe.html">Café</a></li>
         <li><a href="restaurant.html">Restaurant</a></li>
         <li><a href="ateliers.html">Ceramics Workshops</a></li>
-        <li><a href="boutique.html">Shop</a></li>
+        <li><a href="boutique.html">Shop</a></li><li><a href="actualites.html">News</a></li>
         <li><a href="../index.html" class="lang-switch">FR</a></li>
       </ul>
     </nav>
@@ -82,6 +82,15 @@
   </div>
 </section>
 
+<section id="actus-home-wrap" hidden>
+  <div class="container">
+    <h2 class="section-title">Latest news</h2>
+    <hr class="divider">
+    <div class="actus-grid" id="actus-home"></div>
+    <p style="text-align: center; margin-top: 2.5rem;"><a href="actualites.html" class="btn dark">All news</a></p>
+  </div>
+</section>
+
 <section class="infos">
   <div class="container">
     <h2>Practical info</h2>
@@ -92,11 +101,11 @@
       </div>
       <div>
         <h3>Café</h3>
-        <p>Every day<br>9:00am &ndash; 5:00pm</p>
+        <p data-bind-html="horaires.cafe_en">Every day<br>9:00am &ndash; 5:00pm</p>
       </div>
       <div>
         <h3>Restaurant</h3>
-        <p>Tuesday &ndash; Saturday<br>7:30pm &ndash; 11:00pm</p>
+        <p data-bind-html="horaires.restaurant_en">Tuesday &ndash; Saturday<br>7:30pm &ndash; 11:00pm</p>
       </div>
       <div>
         <h3>Contact</h3>
@@ -113,7 +122,7 @@
       <li><a href="cafe.html">Café</a></li>
       <li><a href="restaurant.html">Restaurant</a></li>
       <li><a href="ateliers.html">Workshops</a></li>
-      <li><a href="boutique.html">Shop</a></li>
+      <li><a href="boutique.html">Shop</a></li><li><a href="actualites.html">News</a></li>
     </ul>
   </nav>
   <div class="socials">
@@ -124,5 +133,6 @@
 </footer>
 
 <script src="../js/main.js"></script>
+<script src="../js/app-data.js"></script>
 </body>
 </html>
