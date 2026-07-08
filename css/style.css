@@ -1,0 +1,414 @@
+/* ==========================================================
+   FRANQUETTE — 8 rue des Dames, Paris 17e
+   Identité inspirée d'Octave Batignolles :
+   crème / bleu profond / terracotta, typo Poppins
+   ========================================================== */
+
+:root {
+  --creme: #FFFDFA;
+  --bleu: #11367C;
+  --bleu-doux: #2b5672;
+  --terracotta: #C45527;
+  --encre: #1c1c1c;
+  --sable: #F4EDE3;
+  --font: 'Poppins', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  font-weight: 300;
+  color: var(--encre);
+  background: var(--creme);
+  line-height: 1.7;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--terracotta); text-decoration: none; }
+
+h1, h2, h3 {
+  font-weight: 500;
+  color: var(--bleu);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Header ---------- */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255, 253, 250, 0.95);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--sable);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bleu);
+}
+
+.logo span { color: var(--terracotta); }
+
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  list-style: none;
+}
+
+nav a {
+  color: var(--encre);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+nav a:hover, nav a.active { color: var(--terracotta); }
+
+.lang-switch {
+  font-size: 0.78rem;
+  border: 1px solid var(--bleu);
+  color: var(--bleu) !important;
+  padding: 0.25rem 0.7rem;
+  border-radius: 2rem;
+  transition: all 0.2s;
+}
+
+.lang-switch:hover { background: var(--bleu); color: var(--creme) !important; }
+
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--bleu);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  color: var(--creme);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(15, 25, 45, 0.35), rgba(15, 25, 45, 0.55));
+}
+
+.hero-content { position: relative; z-index: 1; padding: 2rem; }
+
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: var(--creme);
+}
+
+.hero p.tagline {
+  margin-top: 1rem;
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+}
+
+.hero .btn { margin-top: 2.2rem; }
+
+/* Hero réduit pour pages intérieures */
+.hero.small { min-height: 55vh; }
+
+/* ---------- Boutons ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2.2rem;
+  border: 1px solid currentColor;
+  border-radius: 2rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: all 0.25s;
+  color: inherit;
+}
+
+.btn.solid {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: var(--creme);
+}
+
+.btn:hover { background: var(--creme); color: var(--encre); border-color: var(--creme); }
+
+.btn.dark { color: var(--bleu); border-color: var(--bleu); }
+.btn.dark:hover { background: var(--bleu); color: var(--creme); }
+
+.btn.solid:hover { background: var(--bleu); border-color: var(--bleu); color: var(--creme); }
+
+/* ---------- Sections ---------- */
+section { padding: 5rem 1.5rem; }
+
+.container { max-width: 1100px; margin: 0 auto; }
+
+.section-title {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.section-sub {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 3rem;
+  color: var(--bleu-doux);
+}
+
+.divider {
+  width: 60px;
+  height: 2px;
+  background: var(--terracotta);
+  margin: 1.2rem auto 2.5rem;
+  border: none;
+}
+
+/* ---------- Cartes univers (accueil) ---------- */
+.univers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.univers-card {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  color: var(--creme);
+  transition: transform 0.3s;
+}
+
+.univers-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(15,25,45,0.05) 40%, rgba(15,25,45,0.75));
+  transition: background 0.3s;
+}
+
+.univers-card:hover { transform: translateY(-6px); }
+
+.univers-card .card-body {
+  position: relative;
+  z-index: 1;
+  padding: 1.6rem;
+}
+
+.univers-card h3 {
+  color: var(--creme);
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+}
+
+.univers-card p { font-size: 0.88rem; opacity: 0.9; margin-top: 0.3rem; }
+
+.card-placeholder-cafe { background: linear-gradient(135deg, #C45527, #E0854F); }
+.card-placeholder-atelier { background: linear-gradient(135deg, #2b5672, #11367C); }
+.card-placeholder-boutique { background: linear-gradient(135deg, #8a6f4d, #b3925f); }
+
+/* ---------- Bloc texte + image ---------- */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.split img { border-radius: 6px; }
+
+.split h2 { font-size: 1.4rem; margin-bottom: 1rem; }
+
+.split p { margin-bottom: 1rem; color: #3a3a3a; }
+
+/* ---------- Menus / cartes ---------- */
+.menu-section { background: var(--sable); }
+
+.menu-block { max-width: 760px; margin: 0 auto 2.5rem; }
+
+.menu-block h3 {
+  font-size: 1.05rem;
+  color: var(--terracotta);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px dashed #d8cfc0;
+}
+
+.menu-item:last-child { border-bottom: none; }
+
+.menu-item .name { font-weight: 500; color: var(--encre); }
+
+.menu-item .desc {
+  font-size: 0.85rem;
+  color: #6b6b6b;
+  font-style: italic;
+  margin-top: 0.15rem;
+}
+
+.menu-item .price {
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--bleu);
+}
+
+details.wine-cat {
+  max-width: 760px;
+  margin: 0 auto 0.8rem;
+  background: var(--creme);
+  border-radius: 6px;
+  padding: 0.9rem 1.4rem;
+  border: 1px solid #e8dfd2;
+}
+
+details.wine-cat summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--bleu);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+details.wine-cat[open] summary { margin-bottom: 0.8rem; }
+
+/* ---------- Infos pratiques ---------- */
+.infos {
+  background: var(--bleu);
+  color: var(--creme);
+  text-align: center;
+}
+
+.infos h2 { color: var(--creme); font-size: 1.4rem; }
+
+.infos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.infos-grid h3 {
+  color: var(--terracotta);
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.infos a { color: var(--creme); text-decoration: underline; }
+
+/* ---------- Bandeau CTA ---------- */
+.cta-band {
+  text-align: center;
+  background: var(--terracotta);
+  color: var(--creme);
+}
+
+.cta-band h2 { color: var(--creme); font-size: 1.4rem; margin-bottom: 1.5rem; }
+
+/* ---------- Notice "à venir" ---------- */
+.notice {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--sable);
+  border-radius: 6px;
+  padding: 1.5rem 2rem;
+  font-size: 0.92rem;
+  color: var(--bleu-doux);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background: #0d2454;
+  color: rgba(255, 253, 250, 0.85);
+  padding: 3rem 1.5rem 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+footer .logo { color: var(--creme); display: block; margin-bottom: 1rem; }
+
+footer nav ul { justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+
+footer nav a { color: rgba(255, 253, 250, 0.85); }
+
+.socials { margin-bottom: 1.5rem; }
+
+.socials a {
+  color: var(--creme);
+  margin: 0 0.6rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.socials a:hover { color: var(--terracotta); }
+
+footer .legal { opacity: 0.6; font-size: 0.75rem; }
+footer .legal a { color: inherit; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 820px) {
+  .burger { display: block; }
+
+  nav ul {
+    display: none;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--creme);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.2rem;
+    border-bottom: 1px solid var(--sable);
+  }
+
+  nav ul.open { display: flex; }
+
+  .split { grid-template-columns: 1fr; }
+
+  section { padding: 3.5rem 1.2rem; }
+}
