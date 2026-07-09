@@ -11,12 +11,34 @@
     "lien_texte": null
   },
   {
+    "id": "le-monde-matinale-2026",
+    "date": "2026-01-18",
+    "titre": "Franquette dans la sélection du Monde",
+    "titre_en": "Franquette in Le Monde's selection",
+    "texte": "« Des prodiges dans l'assiette » : Franquette fait partie des trois restaurants parisiens recommandés par les critiques du Monde, qui saluent les recettes cosmopolites aux saveurs orientales du chef, comme la selle d'agneau farcie au dukkah et au citron confit.",
+    "texte_en": "\"Wonders on the plate\": Franquette is one of three Paris restaurants recommended by Le Monde's critics, who praise the chef's cosmopolitan recipes with oriental flavours, such as the lamb saddle stuffed with dukkah and preserved lemon.",
+    "image": null,
+    "lien": "https://www.lemonde.fr/m-gastronomie/article/2026/01/18/trois-restaurants-apprecies-par-nos-critiques-a-tester-a-paris_6662999_4497540.html",
+    "lien_texte": "Lire l'article du Monde"
+  },
+  {
+    "id": "le-monde-passe-a-table-2025",
+    "date": "2025-10-18",
+    "titre": "« Un voyage dans l'assiette » — Le Monde",
+    "titre_en": "\"A journey on the plate\" — Le Monde",
+    "texte": "Le Monde consacre un portrait à Franquette : son ancienne confiserie devenue cabinet de curiosités, sa devanture aux lettres d'or, et la cuisine cosmopolite qui fait voyager, rue des Dames.",
+    "texte_en": "Le Monde profiles Franquette: the former candy shop turned cabinet of curiosities, the gold-lettered storefront, and the cosmopolitan cooking that takes you travelling, rue des Dames.",
+    "image": null,
+    "lien": "https://www.lemonde.fr/le-monde-passe-a-table/article/2025/10/18/chez-franquette-a-paris-un-voyage-dans-l-assiette_6648022_6082232.html",
+    "lien_texte": "Lire l'article du Monde"
+  },
+  {
     "id": "suivez-nous-instagram",
     "date": "2026-06-15",
     "titre": "Suivez Franquette sur Instagram",
     "titre_en": "Follow Franquette on Instagram",
-    "texte": "Les coulisses de la cuisine de Clem, les nouvelles cuvées de la cave et les pièces fraîchement sorties du four céramique : tout est sur notre compte.",
-    "texte_en": "Behind the scenes of Clem's kitchen, new cuvées from the cellar and pieces fresh out of the ceramics kiln: it's all on our account.",
+    "texte": "Les coulisses de la cuisine, les nouvelles cuvées de la cave et les pièces fraîchement sorties du four céramique : tout est sur notre compte.",
+    "texte_en": "Behind the scenes of the kitchen, new cuvées from the cellar and pieces fresh out of the ceramics kiln: it's all on our account.",
     "image": null,
     "lien": "https://www.instagram.com/franquette_paris/",
     "lien_texte": "Voir le compte"
