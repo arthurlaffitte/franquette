@@ -14,7 +14,7 @@
 
 <header>
   <div class="header-inner">
-    <a href="index.html" class="logo">Franquette<span>.</span></a>
+    <a href="index.html" class="logo"><img src="../img/logo-noir.png" alt="Franquette"></a>
     <button class="burger" aria-label="Menu">&#9776;</button>
     <nav>
       <ul>
@@ -45,7 +45,7 @@
       <a href="cafe.html" class="univers-card card-placeholder-cafe">
         <div class="card-body">
           <h3>Franquette Café</h3>
-          <p>Mediterranean coffee shop &middot; 9am&ndash;5pm</p>
+          <p>Mediterranean coffee shop &middot; Tue&ndash;Sat 9am&ndash;5pm</p>
         </div>
       </a>
       <a href="restaurant.html" class="univers-card" style="background-image: url('../img/table.jpeg');">
@@ -101,7 +101,7 @@
       </div>
       <div>
         <h3>Café</h3>
-        <p data-bind-html="horaires.cafe_en">Every day<br>9:00am &ndash; 5:00pm</p>
+        <p data-bind-html="horaires.cafe_en">Tuesday &ndash; Saturday<br>9:00am &ndash; 5:00pm</p>
       </div>
       <div>
         <h3>Restaurant</h3>
@@ -115,8 +115,34 @@
   </div>
 </section>
 
+<section>
+  <div class="container">
+    <h2 class="section-title">What people say</h2>
+    <hr class="divider">
+    <div class="avis-note">
+      <div class="chiffre" id="avis-chiffre">4.7/5</div>
+      <div class="etoiles" id="avis-etoiles">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="sous">Based on Google reviews (<span id="avis-count">1189</span>&nbsp;reviews) &middot; <a id="avis-source" href="https://www.google.com/maps/place/?q=place_id:ChIJY0g8FU1u5kcRt07KK3BHrF8" target="_blank" rel="noopener">see on Google Maps</a></p>
+    </div>
+    <div class="avis-grid" id="avis-grid"></div>
+  </div>
+</section>
+
+<section class="menu-section">
+  <div class="container">
+    <h2 class="section-title">Find us</h2>
+    <hr class="divider">
+    <div class="maps-block">
+      <iframe src="https://www.google.com/maps?q=8+rue+des+Dames,+75017+Paris&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Franquette, 8 rue des Dames, Paris"></iframe>
+      <div class="maps-cta">
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJY0g8FU1u5kcRt07KK3BHrF8" target="_blank" rel="noopener" class="btn dark">Open in Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <span class="logo">Franquette<span>.</span></span>
+  <span class="logo footer-logo"><img src="../img/logo-noir.png" alt="Franquette"></span>
   <nav>
     <ul>
       <li><a href="cafe.html">Café</a></li>

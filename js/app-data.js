@@ -45,6 +45,26 @@
     });
   }).catch(() => {});
 
+  // ---------- Avis clients ----------
+  const avisGrid = document.getElementById('avis-grid');
+  if (avisGrid) {
+    getJSON('data/avis.json').then((data) => {
+      const chiffre = document.getElementById('avis-chiffre');
+      const count = document.getElementById('avis-count');
+      const source = document.getElementById('avis-source');
+      const etoiles = document.getElementById('avis-etoiles');
+      if (chiffre) chiffre.textContent = String(data.note_moyenne).replace('.', IS_EN ? '.' : ',') + '/5';
+      if (count) count.textContent = data.nombre_avis;
+      if (source) source.href = data.source_url;
+      if (etoiles) etoiles.textContent = '★★★★★☆'.slice(0, Math.round(data.note_moyenne)) || '★★★★★';
+      avisGrid.innerHTML = (data.avis || []).map((a) =>
+        '<div class="avis-card"><div class="avis-etoiles">' + '★'.repeat(a.note) + '</div>' +
+        '<p>&laquo;&nbsp;' + esc(L(a, 'texte')) + '&nbsp;&raquo;</p>' +
+        '<p class="avis-auteur">' + esc(a.auteur) + '</p></div>'
+      ).join('');
+    }).catch(() => {});
+  }
+
   // ---------- Actualités ----------
   const renderActu = (a) => {
     const img = a.image

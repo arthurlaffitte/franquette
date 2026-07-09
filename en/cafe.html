@@ -10,11 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body class="theme-cafe">
 
 <header>
   <div class="header-inner">
-    <a href="index.html" class="logo">Franquette<span>.</span></a>
+    <a href="index.html" class="logo"><img src="../img/logo-noir.png" alt="Franquette"></a>
     <button class="burger" aria-label="Menu">&#9776;</button>
     <nav>
       <ul>
@@ -28,10 +28,10 @@
   </div>
 </header>
 
-<section class="hero small" style="background-image: url('../img/citrons.jpeg');">
+<section class="hero small" style="background-image: url('../img/cafe-salle.jpg');">
   <div class="hero-content">
     <h1>Franquette Café</h1>
-    <p class="tagline">Mediterranean coffee shop &middot; every day 9am &ndash; 5pm</p>
+    <p class="tagline">Mediterranean coffee shop &middot; Tuesday&ndash;Saturday 9am &ndash; 5pm</p>
   </div>
 </section>
 
@@ -43,35 +43,65 @@
       <p>For green and sweet tooths: matcha, UMA craft sodas, and a sweet-and-savoury snacking menu to enjoy at any hour — focaccia, treats and sun-drenched fruit.</p>
       <a href="index.html#univers" class="btn dark">All of Franquette</a>
     </div>
-    <img src="../img/citrons.jpeg" alt="Lemons on Franquette's counter">
+    <img src="../img/cafe-drapeaux.jpg" alt="The counter and shelves at Franquette Café">
   </div>
 </section>
 
 <section class="menu-section">
   <div class="container">
+    <h2 class="section-title">The place</h2>
+    <hr class="divider">
+    <div class="actus-grid">
+      <img src="../img/cafe-verres.jpg" alt="Detail of the Franquette Café counter" style="border-radius:6px;height:220px;width:100%;object-fit:cover;">
+      <img src="../img/salle-jour.jpg" alt="The Franquette Café room by day" style="border-radius:6px;height:220px;width:100%;object-fit:cover;">
+      <img src="../img/citrons.jpeg" alt="Lemons on Franquette's counter" style="border-radius:6px;height:220px;width:100%;object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
     <h2 class="section-title">The menu</h2>
     <hr class="divider">
 
-    <div class="menu-block">
-      <h3>Specialty coffee</h3>
-      <div class="menu-item"><div><span class="name">Espresso &middot; Americano</span><p class="desc">Beans selected from renowned roasters</p></div></div>
-      <div class="menu-item"><div><span class="name">Latte &middot; Cappuccino &middot; Flat white</span></div></div>
-      <div class="menu-item"><div><span class="name">Matcha latte</span></div></div>
+    <div class="carte-grid">
+      <div class="carte-col">
+        <h3>Espressos</h3>
+        <div class="menu-item"><span class="name">Espresso</span><span class="price">&euro;2.20</span></div>
+        <div class="menu-item"><span class="name">Double espresso</span><span class="price">&euro;3.20</span></div>
+        <div class="menu-item"><span class="name">Ristretto</span><span class="price">&euro;2.20</span></div>
+        <div class="menu-item"><span class="name">Long black</span><span class="price">&euro;2.80</span></div>
+        <div class="menu-item"><span class="name">Macchiato</span><span class="price">&euro;3.50</span></div>
+      </div>
+      <div class="carte-col">
+        <h3>Specialties</h3>
+        <div class="menu-item"><span class="name">Chai latte</span><span class="price">&euro;4.80</span></div>
+        <div class="menu-item"><span class="name">Matcha latte</span><span class="price">&euro;5.20</span></div>
+        <div class="menu-item"><span class="name">Frappé</span><span class="price">&euro;5.50</span></div>
+        <div class="menu-item"><span class="name">Café moka</span><span class="price">&euro;4.80</span></div>
+      </div>
+      <div class="carte-col">
+        <h3>Milk coffees</h3>
+        <div class="menu-item"><span class="name">Cappuccino</span><span class="price">&euro;3.80</span></div>
+        <div class="menu-item"><span class="name">Latte</span><span class="price">&euro;4.20</span></div>
+        <div class="menu-item"><span class="name">Flat white</span><span class="price">&euro;4.50</span></div>
+        <div class="menu-item"><span class="name">Latte macchiato</span><span class="price">&euro;4.30</span></div>
+      </div>
+      <div class="carte-col">
+        <h3>Teas &amp; infusions</h3>
+        <div class="menu-item"><span class="name">Earl Grey tea</span><span class="price">&euro;3.50</span></div>
+        <div class="menu-item"><span class="name">Sencha tea</span><span class="price">&euro;3.50</span></div>
+        <div class="menu-item"><span class="name">Verbena-mint</span><span class="price">&euro;3.50</span></div>
+        <div class="menu-item"><span class="name">Vanilla rooibos</span><span class="price">&euro;3.50</span></div>
+      </div>
+      <div class="carte-col" style="grid-column: 1 / -1;">
+        <h3>Today&rsquo;s fresh</h3>
+        <div class="menu-item"><span class="name">Fresh-pressed juice of the day</span><span class="price">&euro;4.50</span></div>
+      </div>
+      <p class="carte-note">Plant-based milks available &middot; +&euro;0.50</p>
     </div>
 
-    <div class="menu-block">
-      <h3>Cold drinks</h3>
-      <div class="menu-item"><div><span class="name">UMA sodas</span><p class="desc">Craft sodas, seasonal flavours</p></div></div>
-      <div class="menu-item"><div><span class="name">Juices &amp; lemonades</span></div></div>
-    </div>
-
-    <div class="menu-block">
-      <h3>Sweet &amp; savoury snacks</h3>
-      <div class="menu-item"><div><span class="name">The savoury menu</span><p class="desc">To nibble from morning to late afternoon</p></div></div>
-      <div class="menu-item"><div><span class="name">The sweet treats</span><p class="desc">Homemade pastries and delights</p></div></div>
-    </div>
-
-    <p class="notice">The full menu and prices are coming very soon — in the meantime, push the door at 8 rue des Dames and we&rsquo;ll let you taste.</p>
+    <p class="notice" style="margin-top: 2.5rem;">The sweet &amp; savoury menu (snacks, treats) is coming very soon — in the meantime, push the door at 8 rue des Dames and we&rsquo;ll let you taste.</p>
   </div>
 </section>
 
@@ -85,7 +115,7 @@
       </div>
       <div>
         <h3>Hours</h3>
-        <p data-bind-html="horaires.cafe_en">Every day<br>9:00am &ndash; 5:00pm</p>
+        <p data-bind-html="horaires.cafe_en">Tuesday &ndash; Saturday<br>9:00am &ndash; 5:00pm</p>
       </div>
       <div>
         <h3>Contact</h3>
@@ -96,7 +126,7 @@
 </section>
 
 <footer>
-  <span class="logo">Franquette<span>.</span></span>
+  <span class="logo footer-logo"><img src="../img/logo-noir.png" alt="Franquette"></span>
   <nav>
     <ul>
       <li><a href="cafe.html">Café</a></li>

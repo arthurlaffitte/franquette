@@ -78,6 +78,7 @@
       <button class="tab active" data-tab="infos">Infos pratiques</button>
       <button class="tab" data-tab="actus">Actualités</button>
       <button class="tab" data-tab="produits">Boutique</button>
+      <button class="tab" data-tab="avis">Avis clients</button>
       <button class="tab" data-tab="backup">Sauvegarde</button>
     </div>
 
@@ -171,6 +172,32 @@
       </div>
     </div>
 
+    <!-- ---- Avis ---- -->
+    <div class="card tab-pane hidden" id="pane-avis">
+      <h3>Avis clients</h3>
+      <p class="hint" style="margin-top:0.6rem;">Copiez-collez ici de vrais avis depuis votre fiche Google Maps &mdash; le site n&rsquo;affiche jamais d&rsquo;avis inventés.</p>
+      <div class="grid2">
+        <div><label>Note moyenne (sur 5)</label><input type="number" step="0.1" min="0" max="5" id="v-note"></div>
+        <div><label>Nombre d&rsquo;avis</label><input type="number" step="1" min="0" id="v-nombre"></div>
+      </div>
+      <label>Lien vers la fiche Google Maps</label><input type="url" id="v-source">
+      <button class="btn" id="save-avis-meta" style="margin-bottom:1.5rem;">Enregistrer la note</button>
+      <div id="avis-liste" style="border-top:2px solid var(--sable);padding-top:1rem;"></div>
+      <button class="btn secondary" id="avis-new">+ Nouvel avis</button>
+      <div id="avis-form" class="hidden" style="margin-top:1.5rem;border-top:2px solid var(--sable);padding-top:1rem;">
+        <div class="grid2">
+          <div><label>Note (1 à 5)</label><input type="number" min="1" max="5" id="v-a-note" value="5"></div>
+          <div><label>Auteur (ex&nbsp;: &laquo;&nbsp;Claire, avis Google&nbsp;&raquo;)</label><input type="text" id="v-a-auteur"></div>
+        </div>
+        <div class="grid2">
+          <div><label>Texte (FR)</label><textarea id="v-a-texte"></textarea></div>
+          <div><label>Texte (EN, optionnel)</label><textarea id="v-a-texte_en"></textarea></div>
+        </div>
+        <button class="btn" id="avis-save">Enregistrer l&rsquo;avis</button>
+        <button class="btn secondary" id="avis-cancel">Annuler</button>
+      </div>
+    </div>
+
     <!-- ---- Backup ---- -->
     <div class="card tab-pane hidden" id="pane-backup">
       <h3>Sauvegarde &amp; historique</h3>
@@ -194,9 +221,9 @@
   const $ = (id) => document.getElementById(id);
   const API = 'https://api.github.com';
   let AUTH = null; // {owner, repo, token}
-  let SITE = null, ACTUS = [], PRODUITS = [];
+  let SITE = null, ACTUS = [], PRODUITS = [], AVIS = null;
   let SHAS = {};   // path -> sha
-  let editActu = null, editProd = null;
+  let editActu = null, editProd = null, editAvis = null;
 
   const status = (msg, err) => {
     const el = $('status');
@@ -297,10 +324,10 @@
 
   // ---------- Chargement ----------
   async function reloadAll() {
-    [SITE, ACTUS, PRODUITS] = await Promise.all([
-      loadFile('data/site.json'), loadFile('data/actus.json'), loadFile('data/produits.json')
+    [SITE, ACTUS, PRODUITS, AVIS] = await Promise.all([
+      loadFile('data/site.json'), loadFile('data/actus.json'), loadFile('data/produits.json'), loadFile('data/avis.json')
     ]);
-    fillInfos(); renderActus(); renderProduits();
+    fillInfos(); renderActus(); renderProduits(); fillAvisMeta(); renderAvis();
   }
 
   // ---------- Onglets ----------
@@ -449,9 +476,69 @@
     } catch (e) { status(e.message, true); }
   });
 
+  // ---------- Avis ----------
+  function fillAvisMeta() {
+    $('v-note').value = AVIS.note_moyenne;
+    $('v-nombre').value = AVIS.nombre_avis;
+    $('v-source').value = AVIS.source_url;
+  }
+
+  $('save-avis-meta').addEventListener('click', async () => {
+    AVIS.note_moyenne = parseFloat($('v-note').value) || 0;
+    AVIS.nombre_avis = parseInt($('v-nombre').value, 10) || 0;
+    AVIS.source_url = $('v-source').value;
+    try { await saveFile('data/avis.json', AVIS, 'note moyenne des avis'); } catch (e) { status(e.message, true); }
+  });
+
+  function renderAvis() {
+    $('avis-liste').innerHTML = (AVIS.avis || []).map((a, i) =>
+      '<div class="item"><div><strong>' + '★'.repeat(a.note) + '</strong><small>' + a.auteur + ' — ' + a.texte.slice(0, 60) + (a.texte.length > 60 ? '…' : '') + '</small></div>' +
+      '<div class="item-actions"><button data-edit="' + i + '">Modifier</button><button class="del" data-del="' + i + '">Suppr.</button></div></div>'
+    ).join('') || '<p class="hint">Aucun avis pour le moment.</p>';
+  }
+
+  $('avis-liste').addEventListener('click', async (e) => {
+    const ed = e.target.dataset.edit, del = e.target.dataset.del;
+    if (ed != null) {
+      editAvis = +ed;
+      const a = AVIS.avis[editAvis];
+      $('v-a-note').value = a.note; $('v-a-auteur').value = a.auteur;
+      $('v-a-texte').value = a.texte; $('v-a-texte_en').value = a.texte_en || '';
+      $('avis-form').classList.remove('hidden');
+    }
+    if (del != null && confirm('Supprimer cet avis ?')) {
+      AVIS.avis.splice(+del, 1);
+      try { await saveFile('data/avis.json', AVIS, 'suppression avis'); renderAvis(); } catch (err) { status(err.message, true); }
+    }
+  });
+
+  $('avis-new').addEventListener('click', () => {
+    editAvis = null;
+    $('v-a-note').value = 5; $('v-a-auteur').value = ''; $('v-a-texte').value = ''; $('v-a-texte_en').value = '';
+    $('avis-form').classList.remove('hidden');
+  });
+
+  $('avis-cancel').addEventListener('click', () => $('avis-form').classList.add('hidden'));
+
+  $('avis-save').addEventListener('click', async () => {
+    try {
+      const a = {
+        note: Math.max(1, Math.min(5, parseInt($('v-a-note').value, 10) || 5)),
+        auteur: $('v-a-auteur').value, texte: $('v-a-texte').value,
+        texte_en: $('v-a-texte_en').value || null
+      };
+      if (!a.auteur || !a.texte) return status('Auteur et texte obligatoires.', true);
+      if (!AVIS.avis) AVIS.avis = [];
+      if (editAvis != null) AVIS.avis[editAvis] = a; else AVIS.avis.push(a);
+      await saveFile('data/avis.json', AVIS, (editAvis != null ? 'modification' : 'ajout') + ' avis');
+      $('avis-form').classList.add('hidden');
+      renderAvis();
+    } catch (e) { status(e.message, true); }
+  });
+
   // ---------- Backup ----------
   $('backup-dl').addEventListener('click', () => {
-    const blob = new Blob([JSON.stringify({ exporte_le: new Date().toISOString(), site: SITE, actus: ACTUS, produits: PRODUITS }, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify({ exporte_le: new Date().toISOString(), site: SITE, actus: ACTUS, produits: PRODUITS, avis: AVIS }, null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = 'franquette-sauvegarde-' + new Date().toISOString().slice(0, 10) + '.json';
@@ -466,10 +553,12 @@
       const data = JSON.parse(await f.text());
       if (!data.site || !data.actus || !data.produits) throw new Error('Fichier de sauvegarde invalide.');
       SITE = data.site; ACTUS = data.actus; PRODUITS = data.produits;
+      if (data.avis) AVIS = data.avis;
       await saveFile('data/site.json', SITE, 'restauration sauvegarde (infos)');
       await saveFile('data/actus.json', ACTUS, 'restauration sauvegarde (actus)');
       await saveFile('data/produits.json', PRODUITS, 'restauration sauvegarde (produits)');
-      fillInfos(); renderActus(); renderProduits();
+      if (data.avis) await saveFile('data/avis.json', AVIS, 'restauration sauvegarde (avis)');
+      fillInfos(); renderActus(); renderProduits(); fillAvisMeta(); renderAvis();
       status('Sauvegarde restaurée ✓');
     } catch (e) { status(e.message, true); }
   });
