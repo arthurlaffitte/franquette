@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://arthurlaffitte.github.io/franquette/sitemap.xml
