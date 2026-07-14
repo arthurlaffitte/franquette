@@ -15,7 +15,7 @@
     h1,h2,h3 { color:var(--bleu); font-weight:500; }
     .topbar { background:var(--bleu); color:var(--creme); padding:0.9rem 1.5rem; display:flex; justify-content:space-between; align-items:center; }
     .topbar .logo { display:flex; align-items:center; gap:0.7rem; }
-    .topbar .logo img { height:38px; width:auto; filter:invert(1) brightness(1.05); }
+    .topbar .logo img { height:52px; width:auto; filter:invert(1) brightness(1.05); }
     .topbar .logo small { font-weight:300; letter-spacing:0.2em; text-transform:uppercase; }
     .topbar button, .topbar a { background:none; border:1px solid rgba(255,255,255,0.5); color:var(--creme); padding:0.3rem 0.9rem; border-radius:2rem; cursor:pointer; font-family:inherit; font-size:0.8rem; text-decoration:none; }
     .wrap { max-width:900px; margin:2rem auto; padding:0 1.2rem; }
@@ -103,6 +103,18 @@
         <div><label>Lien bons cadeaux</label><input type="url" id="s-bons_cadeaux"></div>
         <div><label>Instagram</label><input type="url" id="s-instagram"></div>
         <div><label>Facebook</label><input type="url" id="s-facebook"></div>
+      </div>
+      <h3 style="margin-top:1.8rem;">Rubriques en mode &laquo;&nbsp;&Agrave; venir&nbsp;&raquo;</h3>
+      <p class="hint">Une rubrique d&eacute;coch&eacute;e reste visible dans le menu mais affiche le message &laquo;&nbsp;ouverture prochainement&nbsp;&raquo; &agrave; la place de son contenu. Cochez pour l&rsquo;activer d&rsquo;un clic.</p>
+      <label style="text-transform:none;letter-spacing:0;display:flex;align-items:center;gap:0.5rem;margin-top:0.8rem;">
+        <input type="checkbox" id="s-rub-boutique" style="width:auto;"> Boutique <strong>active</strong> (d&eacute;coch&eacute;e = &agrave; venir)
+      </label>
+      <label style="text-transform:none;letter-spacing:0;display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+        <input type="checkbox" id="s-rub-ateliers" style="width:auto;"> Ateliers c&eacute;ramique <strong>actifs</strong> (d&eacute;coch&eacute;e = &agrave; venir)
+      </label>
+      <div class="grid2">
+        <div><label>Message &laquo;&nbsp;&agrave; venir&nbsp;&raquo; (FR)</label><input type="text" id="s-rub-msg-fr"></div>
+        <div><label>Message &laquo;&nbsp;coming soon&nbsp;&raquo; (EN)</label><input type="text" id="s-rub-msg-en"></div>
       </div>
       <button class="btn" id="save-infos">Enregistrer les infos</button>
     </div>
@@ -351,13 +363,19 @@
     $('s-bons_cadeaux').value = SITE.liens.bons_cadeaux;
     $('s-instagram').value = SITE.liens.instagram;
     $('s-facebook').value = SITE.liens.facebook;
+    const R = SITE.rubriques || {};
+    $('s-rub-boutique').checked = R.boutique !== false;
+    $('s-rub-ateliers').checked = R.ateliers !== false;
+    $('s-rub-msg-fr').value = R.message_fr || 'Ouverture prochainement — courant septembre';
+    $('s-rub-msg-en').value = R.message_en || 'Opening soon — this September';
   }
 
   $('save-infos').addEventListener('click', async () => {
     SITE = {
       contact: { telephone: $('s-telephone').value, tel_href: $('s-tel_href').value, email: $('s-email').value },
       horaires: { cafe_fr: $('s-cafe_fr').value, cafe_en: $('s-cafe_en').value, restaurant_fr: $('s-restaurant_fr').value, restaurant_en: $('s-restaurant_en').value },
-      liens: { reservation: $('s-reservation').value, bons_cadeaux: $('s-bons_cadeaux').value, instagram: $('s-instagram').value, facebook: $('s-facebook').value }
+      liens: { reservation: $('s-reservation').value, bons_cadeaux: $('s-bons_cadeaux').value, instagram: $('s-instagram').value, facebook: $('s-facebook').value },
+      rubriques: { boutique: $('s-rub-boutique').checked, ateliers: $('s-rub-ateliers').checked, message_fr: $('s-rub-msg-fr').value, message_en: $('s-rub-msg-en').value }
     };
     try { await saveFile('data/site.json', SITE, 'infos pratiques'); } catch (e) { status(e.message, true); }
   });

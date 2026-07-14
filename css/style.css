@@ -76,7 +76,7 @@ header {
 
 .logo { display: block; }
 
-.logo img { height: 34px; width: auto; display: block; }
+.logo img { height: 58px; width: auto; display: block; }
 
 nav ul {
   display: flex;
@@ -383,7 +383,7 @@ footer {
 }
 
 footer .logo { margin: 0 auto 1rem; width: fit-content; }
-footer .logo img { filter: invert(1) brightness(1.05); }
+footer .logo img { filter: invert(1) brightness(1.05); height: 84px; }
 
 footer nav ul { justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
 
@@ -621,4 +621,17 @@ footer .legal a { color: inherit; }
   section { padding: 3.5rem 1.2rem; }
 
   .carte-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Badge « à venir » (rubriques désactivées) ---------- */
+.badge-soon {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.9rem;
+  background: var(--terracotta);
+  color: var(--creme);
+  border-radius: 2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }

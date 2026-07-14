@@ -15,5 +15,11 @@
     "bons_cadeaux": "https://uniiti.com/shop/franquette",
     "instagram": "https://www.instagram.com/franquette_paris/",
     "facebook": "https://www.facebook.com/franquetterestaurant/"
+  },
+  "rubriques": {
+    "boutique": false,
+    "ateliers": false,
+    "message_fr": "Ouverture prochainement — courant septembre",
+    "message_en": "Opening soon — this September"
   }
 }

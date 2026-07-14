@@ -43,6 +43,39 @@
       const val = el.getAttribute('data-bind-html').split('.').reduce((o, k) => (o ? o[k] : null), site);
       if (val) el.innerHTML = val;
     });
+
+    // ---------- Rubriques en mode « à venir » (activables depuis /admin) ----------
+    const R = site.rubriques || {};
+    const soonMsg = IS_EN ? (R.message_en || 'Opening soon') : (R.message_fr || 'Ouverture prochainement');
+
+    const pageOff =
+      (document.body.classList.contains('theme-boutique') && R.boutique === false) ||
+      (document.body.classList.contains('theme-atelier') && R.ateliers === false);
+
+    if (pageOff) {
+      document.querySelectorAll('section:not(.hero)').forEach((s) => s.remove());
+      const heroBtn = document.querySelector('.hero .btn');
+      if (heroBtn) heroBtn.remove();
+      const sec = document.createElement('section');
+      sec.innerHTML = '<div class="container" style="text-align:center;">' +
+        '<h2 class="section-title">' + esc(soonMsg) + '</h2><hr class="divider">' +
+        '<p class="section-sub">' + (IS_EN
+          ? 'We are putting the finishing touches to this part of Franquette. Follow us on Instagram to be the first to know!'
+          : 'On peaufine les derniers détails de cette partie de Franquette. Suivez-nous sur Instagram pour être les premiers informés !') + '</p>' +
+        '<p style="text-align:center;"><a class="btn dark" href="' + esc((site.liens && site.liens.instagram) || '#') + '" target="_blank" rel="noopener">' +
+        (IS_EN ? 'Follow us' : 'Suivre @franquette_paris') + '</a></p></div>';
+      const footer = document.querySelector('footer');
+      footer.parentNode.insertBefore(sec, footer);
+    }
+
+    // Badge « à venir » sur les cartes de l'accueil
+    const badgeCard = (href) => {
+      document.querySelectorAll('.univers-card[href="' + href + '"] .card-body').forEach((b) => {
+        b.insertAdjacentHTML('beforeend', '<span class="badge-soon">' + esc(soonMsg) + '</span>');
+      });
+    };
+    if (R.boutique === false) badgeCard('boutique.html');
+    if (R.ateliers === false) badgeCard('ateliers.html');
   }).catch(() => {});
 
   // ---------- Avis clients ----------
