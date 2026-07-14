@@ -19,8 +19,18 @@
   --font: 'Poppins', sans-serif;
 }
 
-body.theme-cafe { --terracotta: #6E7C4A; }
-body.theme-resto { --terracotta: #6B1F2E; }
+/* Thèmes par univers : accent, titres, fonds de section et bandeau infos
+   changent avec la rubrique (olive au café, bordeaux au restaurant,
+   sapin aux ateliers, doré à la boutique). */
+body.theme-cafe { --terracotta: #6E7C4A; --bleu: #49522F; --bleu-doux: #78805A; --sable: #EDEFE0; }
+body.theme-resto { --terracotta: #8A2937; --bleu: #45202A; --bleu-doux: #8A6670; --sable: #F2E5E2; }
+body.theme-atelier { --terracotta: #44646A; --bleu: #35494D; --bleu-doux: #6E8489; --sable: #E7EDEC; }
+body.theme-boutique { --terracotta: #96703B; --bleu: #4A3A2F; --bleu-doux: #8C7B6B; --sable: #F0E7D4; }
+
+body.theme-cafe .hero::after { background: linear-gradient(rgba(50, 58, 30, 0.35), rgba(36, 42, 21, 0.6)); }
+body.theme-resto .hero::after { background: linear-gradient(rgba(56, 18, 27, 0.35), rgba(40, 12, 19, 0.6)); }
+body.theme-atelier .hero::after { background: linear-gradient(rgba(36, 56, 60, 0.35), rgba(24, 40, 43, 0.6)); }
+body.theme-boutique .hero::after { background: linear-gradient(rgba(64, 48, 26, 0.35), rgba(46, 34, 18, 0.6)); }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
