@@ -30,7 +30,7 @@
       a.href = site.contact.tel_href;
       if (/\d/.test(a.textContent)) a.textContent = site.contact.telephone;
     });
-    document.querySelectorAll('a[href^="mailto:"]').forEach((a) => {
+    document.querySelectorAll('a[href^="mailto:"]:not(.email-fixe)').forEach((a) => {
       const suffix = a.getAttribute('href').includes('?') ? a.getAttribute('href').slice(a.getAttribute('href').indexOf('?')) : '';
       a.href = 'mailto:' + site.contact.email + suffix;
       if (a.textContent.includes('@')) a.textContent = site.contact.email;

@@ -5,8 +5,8 @@
     "email": "bonjour@franquette-paris.fr"
   },
   "horaires": {
-    "cafe_fr": "Mardi &ndash; Samedi<br>9h00 &ndash; 17h00",
-    "cafe_en": "Tuesday &ndash; Saturday<br>9:00am &ndash; 5:00pm",
+    "cafe_fr": "Mardi &ndash; Samedi<br>8h30 &ndash; 17h30",
+    "cafe_en": "Tuesday &ndash; Saturday<br>8:30am &ndash; 5:30pm",
     "restaurant_fr": "Mardi &ndash; Samedi<br>19h30 &ndash; 23h00",
     "restaurant_en": "Tuesday &ndash; Saturday<br>7:30pm &ndash; 11:00pm"
   },
