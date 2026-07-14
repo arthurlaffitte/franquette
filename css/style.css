@@ -635,3 +635,20 @@ footer .legal a { color: inherit; }
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+
+/* ---------- Onglets de carte (café) ---------- */
+.hidden-pane { display: none; }
+.carte-pane { animation: fadein 0.3s ease; }
+@keyframes fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Sélecteur de langues ---------- */
+.langs { display: flex; gap: 0.15rem; align-items: center; }
+.langs a {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.35rem;
+  color: var(--encre);
+  border-radius: 4px;
+}
+.langs a:hover { color: var(--terracotta); }
+.langs a.cur { font-weight: 600; color: var(--terracotta); border-bottom: 2px solid var(--terracotta); border-radius: 0; cursor: default; }

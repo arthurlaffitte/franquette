@@ -2,25 +2,38 @@
 // et met à jour les pages. Les valeurs écrites en dur dans le HTML servent de repli
 // si le JSON est indisponible.
 (function () {
-  const IS_EN = document.documentElement.lang === 'en';
-  const ROOT = IS_EN ? '..' : '.';
-  const L = (obj, key) => (IS_EN && obj[key + '_en']) ? obj[key + '_en'] : obj[key];
+  // Langue de la page : fr (racine) ou en/de/nl/it (sous-dossiers).
+  // Pour de/nl/it, les contenus JSON replient sur l'anglais puis le français.
+  const LANG = (document.documentElement.lang || 'fr').slice(0, 2);
+  const IS_EN = LANG !== 'fr';
+  const ROOT = LANG === 'fr' ? '.' : '..';
+  const L = (obj, key) => obj[key + '_' + LANG] || (LANG !== 'fr' && obj[key + '_en']) || obj[key];
+
+  const UI_ALL = {
+    fr: { locale: 'fr-FR', prix: 'Prix à venir', lire: 'En savoir plus', tout: 'Tout', commander: 'Commander', bientot: 'Bientôt disponible', surplace: 'Également disponible sur place au 8 rue des Dames, Paris 17e.', aucuneActu: 'Pas encore d’actus — revenez vite !', aucunProduit: 'Pas encore de produit dans cette catégorie.', suivre: 'Suivre @franquette_paris', peaufine: 'On peaufine les derniers détails de cette partie de Franquette. Suivez-nous sur Instagram pour être les premiers informés !' },
+    en: { locale: 'en-GB', prix: 'Price coming soon', lire: 'Read more', tout: 'All', commander: 'Order', bientot: 'Available soon', surplace: 'Also available in person at 8 rue des Dames, Paris 17th.', aucuneActu: 'No news yet — come back soon!', aucunProduit: 'No products in this category yet.', suivre: 'Follow @franquette_paris', peaufine: 'We are putting the finishing touches to this part of Franquette. Follow us on Instagram to be the first to know!' },
+    de: { locale: 'de-DE', prix: 'Preis folgt', lire: 'Mehr lesen', tout: 'Alle', commander: 'Bestellen', bientot: 'Bald verfügbar', surplace: 'Auch vor Ort erhältlich: 8 rue des Dames, Paris 17.', aucuneActu: 'Noch keine Neuigkeiten — bald mehr!', aucunProduit: 'Noch keine Produkte in dieser Kategorie.', suivre: '@franquette_paris folgen', peaufine: 'Wir legen hier letzte Hand an. Folgen Sie uns auf Instagram, um es als Erste zu erfahren!' },
+    nl: { locale: 'nl-NL', prix: 'Prijs volgt', lire: 'Lees meer', tout: 'Alles', commander: 'Bestellen', bientot: 'Binnenkort beschikbaar', surplace: 'Ook verkrijgbaar ter plaatse: 8 rue des Dames, Parijs 17e.', aucuneActu: 'Nog geen nieuws — kom snel terug!', aucunProduit: 'Nog geen producten in deze categorie.', suivre: 'Volg @franquette_paris', peaufine: 'We leggen de laatste hand aan dit deel van Franquette. Volg ons op Instagram en weet het als eerste!' },
+    it: { locale: 'it-IT', prix: 'Prezzo in arrivo', lire: 'Scopri di più', tout: 'Tutto', commander: 'Ordina', bientot: 'Presto disponibile', surplace: 'Disponibile anche sul posto: 8 rue des Dames, Parigi 17°.', aucuneActu: 'Ancora nessuna novità — torna presto!', aucunProduit: 'Ancora nessun prodotto in questa categoria.', suivre: 'Segui @franquette_paris', peaufine: 'Stiamo rifinendo gli ultimi dettagli di questa parte di Franquette. Seguici su Instagram per saperlo per primi!' }
+  };
+  const UI = UI_ALL[LANG] || UI_ALL.en;
 
   const CATEGORIES = {
-    vins: { fr: 'Les vins', en: 'Wines', cls: 'card-placeholder-boutique' },
-    ceramique: { fr: 'Les céramiques', en: 'Ceramics', cls: 'card-placeholder-atelier' },
-    huile: { fr: "L'huile d'olive", en: 'Olive oil', cls: 'card-placeholder-cafe' },
-    cafe: { fr: 'Le café', en: 'Coffee', cls: 'card-placeholder-boutique' },
-    cadeau: { fr: 'Bons cadeaux', en: 'Gift vouchers', cls: 'card-placeholder-atelier' }
+    vins: { fr: 'Les vins', en: 'Wines', de: 'Weine', nl: 'Wijnen', it: 'Vini', cls: 'card-placeholder-boutique' },
+    ceramique: { fr: 'Les céramiques', en: 'Ceramics', de: 'Keramik', nl: 'Keramiek', it: 'Ceramiche', cls: 'card-placeholder-atelier' },
+    huile: { fr: "L'huile d'olive", en: 'Olive oil', de: 'Olivenöl', nl: 'Olijfolie', it: 'Olio d’oliva', cls: 'card-placeholder-cafe' },
+    cafe: { fr: 'Le café', en: 'Coffee', de: 'Kaffee', nl: 'Koffie', it: 'Caffè', cls: 'card-placeholder-boutique' },
+    cadeau: { fr: 'Bons cadeaux', en: 'Gift vouchers', de: 'Gutscheine', nl: 'Cadeaubonnen', it: 'Buoni regalo', cls: 'card-placeholder-atelier' }
   };
+  const catLabel = (c) => { const o = CATEGORIES[c] || {}; return o[LANG] || o.en || o.fr || c; };
 
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const prixTxt = (p) => p == null
-    ? (IS_EN ? 'Price coming soon' : 'Prix à venir')
-    : p.toFixed(2).replace('.', ',') + ' €';
+    ? UI.prix
+    : (LANG === 'fr' ? p.toFixed(2).replace('.', ',') + ' €' : '€' + p.toFixed(2));
   const dateTxt = (iso) => {
     const d = new Date(iso + 'T12:00:00');
-    return d.toLocaleDateString(IS_EN ? 'en-GB' : 'fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    return d.toLocaleDateString(UI.locale, { day: 'numeric', month: 'long', year: 'numeric' });
   };
   const getJSON = (path) => fetch(ROOT + '/' + path, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(path); return r.json(); });
 
@@ -59,11 +72,9 @@
       const sec = document.createElement('section');
       sec.innerHTML = '<div class="container" style="text-align:center;">' +
         '<h2 class="section-title">' + esc(soonMsg) + '</h2><hr class="divider">' +
-        '<p class="section-sub">' + (IS_EN
-          ? 'We are putting the finishing touches to this part of Franquette. Follow us on Instagram to be the first to know!'
-          : 'On peaufine les derniers détails de cette partie de Franquette. Suivez-nous sur Instagram pour être les premiers informés !') + '</p>' +
+        '<p class="section-sub">' + UI.peaufine + '</p>' +
         '<p style="text-align:center;"><a class="btn dark" href="' + esc((site.liens && site.liens.instagram) || '#') + '" target="_blank" rel="noopener">' +
-        (IS_EN ? 'Follow us' : 'Suivre @franquette_paris') + '</a></p></div>';
+        UI.suivre + '</a></p></div>';
       const footer = document.querySelector('footer');
       footer.parentNode.insertBefore(sec, footer);
     }
@@ -104,7 +115,7 @@
       ? '<img src="' + esc(ROOT + '/' + a.image) + '" alt="" loading="lazy">'
       : '';
     const lien = a.lien
-      ? '<a href="' + esc(a.lien) + '" target="_blank" rel="noopener">' + esc(a.lien_texte || (IS_EN ? 'Read more' : 'En savoir plus')) + ' →</a>'
+      ? '<a href="' + esc(a.lien) + '" target="_blank" rel="noopener">' + esc((LANG === 'fr' && a.lien_texte) || UI.lire) + ' →</a>'
       : '';
     return '<article class="actu-card">' + img +
       '<div class="actu-body"><p class="actu-date">' + esc(dateTxt(a.date)) + '</p>' +
@@ -120,7 +131,7 @@
       if (actuList) {
         actuList.innerHTML = actus.length
           ? actus.map(renderActu).join('')
-          : '<p class="notice">' + (IS_EN ? 'No news yet — come back soon!' : 'Pas encore d’actus — revenez vite !') + '</p>';
+          : '<p class="notice">' + UI.aucuneActu + '</p>';
       }
       if (actuHome && actus.length) {
         actuHome.innerHTML = actus.slice(0, 3).map(renderActu).join('');
@@ -149,16 +160,16 @@
           '<div class="produit-visuel" ' + (p.image ? 'style="background-image:url(\'' + esc(ROOT + '/' + p.image) + '\')"' : '') + '>' +
           (p.image ? '' : '<span class="produit-visuel-badge ' + ((CATEGORIES[p.categorie] || {}).cls || '') + '"></span>') +
           '</div>' +
-          '<div class="produit-body"><p class="produit-cat">' + esc((CATEGORIES[p.categorie] || {})[IS_EN ? 'en' : 'fr'] || p.categorie) + '</p>' +
+          '<div class="produit-body"><p class="produit-cat">' + esc(catLabel(p.categorie)) + '</p>' +
           '<h3>' + esc(L(p, 'nom')) + '</h3>' +
           '<p class="produit-prix">' + prixTxt(p.prix) + '</p></div></a>'
-        ).join('') || '<p class="notice">' + (IS_EN ? 'No products in this category yet.' : 'Pas encore de produit dans cette catégorie.') + '</p>';
+        ).join('') || '<p class="notice">' + UI.aucunProduit + '</p>';
       };
 
       if (chips) {
         chips.innerHTML = ['tous', ...cats].map((c) =>
           '<button class="chip' + (c === 'tous' ? ' active' : '') + '" data-cat="' + esc(c) + '">' +
-          esc(c === 'tous' ? (IS_EN ? 'All' : 'Tout') : ((CATEGORIES[c] || {})[IS_EN ? 'en' : 'fr'] || c)) + '</button>'
+          esc(c === 'tous' ? UI.tout : (catLabel(c))) + '</button>'
         ).join('');
         chips.addEventListener('click', (e) => {
           const b = e.target.closest('.chip');
@@ -180,23 +191,24 @@
       const p = produits.find((x) => x.id === id) || produits[0];
       if (!p) return;
       document.title = L(p, 'nom') + ' — Franquette';
-      const enLink = document.getElementById('lang-switch-link');
-      if (enLink) enLink.href = enLink.getAttribute('href').split('?')[0] + '?id=' + encodeURIComponent(p.id);
+      document.querySelectorAll('.langs a[href]').forEach((a) => {
+        a.href = a.getAttribute('href').split('?')[0] + '?id=' + encodeURIComponent(p.id);
+      });
 
       const achat = p.stripe
-        ? '<a href="' + esc(p.stripe) + '" class="btn solid" target="_blank" rel="noopener">' + (IS_EN ? 'Order' : 'Commander') + '</a>'
-        : '<button class="btn dark" disabled style="opacity:.5;cursor:not-allowed;">' + (IS_EN ? 'Available soon' : 'Bientôt disponible') + '</button>';
+        ? '<a href="' + esc(p.stripe) + '" class="btn solid" target="_blank" rel="noopener">' + UI.commander + '</a>'
+        : '<button class="btn dark" disabled style="opacity:.5;cursor:not-allowed;">' + UI.bientot + '</button>';
 
       detail.innerHTML =
         '<div class="produit-visuel produit-visuel-grand" ' + (p.image ? 'style="background-image:url(\'' + esc(ROOT + '/' + p.image) + '\')"' : '') + '>' +
         (p.image ? '' : '<span class="produit-visuel-badge ' + ((CATEGORIES[p.categorie] || {}).cls || '') + '"></span>') + '</div>' +
-        '<div><p class="produit-cat">' + esc((CATEGORIES[p.categorie] || {})[IS_EN ? 'en' : 'fr'] || p.categorie) + '</p>' +
+        '<div><p class="produit-cat">' + esc(catLabel(p.categorie)) + '</p>' +
         '<h1 class="produit-titre">' + esc(L(p, 'nom')) + '</h1>' +
         '<p class="produit-prix produit-prix-grand">' + prixTxt(p.prix) + '</p>' +
         '<p class="produit-desc">' + esc(L(p, 'description')) + '</p>' +
         '<div style="margin-top:1.6rem;">' + achat + '</div>' +
         '<p style="margin-top:1.2rem;font-size:.85rem;color:#6b6b6b;">' +
-        (IS_EN ? 'Also available in person at 8 rue des Dames, Paris 17th.' : 'Également disponible sur place au 8 rue des Dames, Paris 17e.') + '</p></div>';
+        UI.surplace + '</p></div>';
 
       const ld = {
         '@context': 'https://schema.org', '@type': 'Product',

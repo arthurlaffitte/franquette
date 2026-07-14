@@ -23,7 +23,7 @@
         <li><a href="restaurant.html">Restaurant</a></li>
         <li><a href="ateliers.html">Ateliers Céramique</a></li>
         <li><a href="boutique.html">Boutique</a></li><li><a href="actualites.html">Actualités</a></li>
-        <li><a href="en/cafe.html" class="lang-switch">EN</a></li>
+        <li class="langs"><a class="cur">FR</a> <a href="en/cafe.html">EN</a> <a href="de/cafe.html">DE</a> <a href="nl/cafe.html">NL</a> <a href="it/cafe.html">IT</a></li>
       </ul>
     </nav>
   </div>
@@ -65,44 +65,47 @@
     <h2 class="section-title">À la carte</h2>
     <hr class="divider">
 
-    <div class="carte-grid">
-      <div class="carte-col">
-        <h3>Espressos</h3>
-        <div class="menu-item"><span class="name">Expresso</span><span class="price">2,20&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Double expresso</span><span class="price">3,20&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Ristretto</span><span class="price">2,20&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Allongé</span><span class="price">2,80&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Macchiato</span><span class="price">3,50&nbsp;€</span></div>
-      </div>
-      <div class="carte-col">
-        <h3>Spécialités</h3>
-        <div class="menu-item"><span class="name">Chai latte</span><span class="price">4,80&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Matcha latte</span><span class="price">5,20&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Frappé</span><span class="price">5,50&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Café moka</span><span class="price">4,80&nbsp;€</span></div>
-      </div>
-      <div class="carte-col">
-        <h3>Cafés au lait</h3>
-        <div class="menu-item"><span class="name">Cappuccino</span><span class="price">3,80&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Latte</span><span class="price">4,20&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Flat white</span><span class="price">4,50&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Latte macchiato</span><span class="price">4,30&nbsp;€</span></div>
-      </div>
-      <div class="carte-col">
-        <h3>Thés &amp; infusions</h3>
-        <div class="menu-item"><span class="name">Thé Earl Grey</span><span class="price">3,50&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Thé Sencha</span><span class="price">3,50&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Verveine-menthe</span><span class="price">3,50&nbsp;€</span></div>
-        <div class="menu-item"><span class="name">Rooibos vanille</span><span class="price">3,50&nbsp;€</span></div>
-      </div>
-      <div class="carte-col" style="grid-column: 1 / -1;">
-        <h3>Frais du jour</h3>
-        <div class="menu-item"><span class="name">Jus du jour, pressé minute</span><span class="price">4,50&nbsp;€</span></div>
+    <div class="filter-chips carte-tabs">
+      <button class="chip active" data-carte="chaudes">Boissons chaudes</button>
+      <button class="chip" data-carte="fraiches">Boissons fraîches</button>
+      <button class="chip" data-carte="pdj">Petit-déjeuner</button>
+      <button class="chip" data-carte="dej">Déjeuner</button>
+      <button class="chip" data-carte="douceurs">Douceurs</button>
+    </div>
+
+    <div class="carte-pane" data-pane="chaudes">
+      <div class="carte-grid">
+        <div class="carte-col">
+          <h3>Espressos</h3>
+          <div class="menu-item"><span class="name">Expresso</span><span class="price">2,20&nbsp;€</span></div><div class="menu-item"><span class="name">Double expresso</span><span class="price">3,20&nbsp;€</span></div><div class="menu-item"><span class="name">Ristretto</span><span class="price">2,20&nbsp;€</span></div><div class="menu-item"><span class="name">Allongé</span><span class="price">2,80&nbsp;€</span></div><div class="menu-item"><span class="name">Macchiato</span><span class="price">3,50&nbsp;€</span></div>
+        </div>
+        <div class="carte-col">
+          <h3>Cafés au lait</h3>
+          <div class="menu-item"><span class="name">Cappuccino</span><span class="price">3,80&nbsp;€</span></div><div class="menu-item"><span class="name">Latte</span><span class="price">4,20&nbsp;€</span></div><div class="menu-item"><span class="name">Flat white</span><span class="price">4,50&nbsp;€</span></div><div class="menu-item"><span class="name">Latte macchiato</span><span class="price">4,30&nbsp;€</span></div>
+        </div>
+        <div class="carte-col">
+          <h3>Spécialités</h3>
+          <div class="menu-item"><span class="name">Chai latte</span><span class="price">4,80&nbsp;€</span></div><div class="menu-item"><span class="name">Matcha latte</span><span class="price">5,20&nbsp;€</span></div><div class="menu-item"><span class="name">Frappé</span><span class="price">5,50&nbsp;€</span></div><div class="menu-item"><span class="name">Café moka</span><span class="price">4,80&nbsp;€</span></div>
+        </div>
+        <div class="carte-col">
+          <h3>Thés &amp; infusions</h3>
+          <div class="menu-item"><span class="name">Thé Earl Grey</span><span class="price">3,50&nbsp;€</span></div><div class="menu-item"><span class="name">Thé Sencha</span><span class="price">3,50&nbsp;€</span></div><div class="menu-item"><span class="name">Verveine-menthe</span><span class="price">3,50&nbsp;€</span></div><div class="menu-item"><span class="name">Rooibos vanille</span><span class="price">3,50&nbsp;€</span></div>
+        </div>
       </div>
       <p class="carte-note">Laits végétaux disponibles &middot; +0,50&nbsp;€</p>
     </div>
-
-    <p class="notice" style="margin-top: 2.5rem;">La carte salée-sucrée (snacking, douceurs) arrive très vite — en attendant, poussez la porte du 8 rue des Dames, on vous fera goûter.</p>
+    <div class="carte-pane hidden-pane" data-pane="fraiches">
+      <div class="carte-grid">
+        <div class="carte-col">
+          <h3>Boissons fraîches</h3>
+          <div class="menu-item"><span class="name">Jus du jour, pressé minute</span><span class="price">4,50&nbsp;€</span></div>
+          <div class="menu-item"><span class="name">Sodas artisanaux UMA<br><small style="color:#8a8a8a;">Parfums de saison</small></span><span class="price">Prix à venir</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="carte-pane hidden-pane" data-pane="pdj"><p class="notice">La carte petit-déjeuner arrive début août : granola maison, tartines, douceurs du matin.</p></div>
+    <div class="carte-pane hidden-pane" data-pane="dej"><p class="notice">La carte déjeuner salée arrive début août : focaccias, assiettes méditerranéennes, salades de saison.</p></div>
+    <div class="carte-pane hidden-pane" data-pane="douceurs"><p class="notice">Les douceurs arrivent début août : pâtisseries maison et gourmandises ensoleillées.</p></div>
   </div>
 </section>
 
