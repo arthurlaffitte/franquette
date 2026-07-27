@@ -17,7 +17,7 @@
     "facebook": "https://www.facebook.com/franquetterestaurant/"
   },
   "rubriques": {
-    "boutique": false,
+    "boutique": true,
     "ateliers": false,
     "message_fr": "Ouverture prochainement — courant septembre",
     "message_en": "Opening soon — this September"
