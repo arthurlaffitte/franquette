@@ -652,3 +652,7 @@ footer .legal a { color: inherit; }
 }
 .langs a:hover { color: var(--terracotta); }
 .langs a.cur { font-weight: 600; color: var(--terracotta); border-bottom: 2px solid var(--terracotta); border-radius: 0; cursor: default; }
+
+/* ---------- Lien discret vers l'administration ---------- */
+.admin-link { color: inherit; opacity: 0.45; transition: opacity 0.2s; }
+.admin-link:hover { opacity: 1; color: var(--terracotta); }

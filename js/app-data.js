@@ -89,6 +89,18 @@
     if (R.ateliers === false) badgeCard('ateliers.html');
   }).catch(() => {});
 
+  // ---------- Textes de page éditables depuis /admin ----------
+  if (document.querySelector('[data-txt]')) {
+    getJSON('data/textes.json').then((T) => {
+      document.querySelectorAll('[data-txt]').forEach((el) => {
+        const entry = T[el.getAttribute('data-txt')];
+        if (!entry) return;
+        const val = entry[LANG];
+        if (val != null && String(val).trim() !== '') el.innerHTML = val;
+      });
+    }).catch(() => {});
+  }
+
   // ---------- Avis clients ----------
   const avisGrid = document.getElementById('avis-grid');
   if (avisGrid) {

@@ -59,24 +59,43 @@
   <!-- ================= CONNEXION ================= -->
   <div id="login-view" class="card">
     <h2>Connexion administrateur</h2>
-    <p class="hint" style="margin-top:0.6rem;">L&rsquo;accès se fait avec un <strong>jeton d&rsquo;accès GitHub</strong> (fine-grained token) autorisé en écriture sur le dépôt du site. C&rsquo;est lui qui fait office de mot de passe&nbsp;: sans jeton valide, aucune modification n&rsquo;est possible.</p>
-    <div class="grid2">
-      <div><label>Compte GitHub</label><input type="text" id="in-owner" value="arthurlaffitte"></div>
-      <div><label>Dépôt</label><input type="text" id="in-repo" value="franquette"></div>
+
+    <!-- Cas 1 : un accès est déjà enregistré sur cet appareil -> mot de passe seul -->
+    <div id="login-quick" class="hidden">
+      <p class="hint" style="margin-top:0.6rem;">Entrez votre mot de passe pour acc&eacute;der &agrave; l&rsquo;administration du site.</p>
+      <label>Mot de passe</label>
+      <input type="password" id="in-pass" placeholder="Votre mot de passe" autocomplete="current-password">
+      <button class="btn" id="btn-unlock">Se connecter</button>
+      <p class="hint" id="quick-err" style="color:#a33;"></p>
+      <p class="hint" style="margin-top:1.2rem;"><a href="#" id="link-reset" style="color:#8C7B6B;">Mot de passe oubli&eacute; ou nouvel acc&egrave;s&nbsp;?</a></p>
     </div>
-    <label>Jeton d&rsquo;accès (token)</label>
-    <input type="password" id="in-token" placeholder="github_pat_…" autocomplete="current-password">
-    <label style="text-transform:none;letter-spacing:0;display:flex;align-items:center;gap:0.5rem;margin-top:1rem;">
-      <input type="checkbox" id="in-remember" style="width:auto;"> Rester connecté sur cet appareil
-    </label>
-    <button class="btn" id="btn-login">Se connecter</button>
-    <p class="hint" id="login-err" style="color:#a33;"></p>
+
+    <!-- Cas 2 : premier accès sur cet appareil -> jeton + choix du mot de passe -->
+    <div id="login-full">
+      <p class="hint" style="margin-top:0.6rem;">Premi&egrave;re connexion sur cet appareil&nbsp;: collez votre <strong>jeton d&rsquo;acc&egrave;s GitHub</strong> et choisissez un mot de passe. Les fois suivantes, le mot de passe suffira &mdash; le jeton reste chiffr&eacute; dans ce navigateur et n&rsquo;est jamais publi&eacute;.</p>
+      <div class="grid2">
+        <div><label>Compte GitHub</label><input type="text" id="in-owner" value="arthurlaffitte"></div>
+        <div><label>D&eacute;p&ocirc;t</label><input type="text" id="in-repo" value="franquette"></div>
+      </div>
+      <label>Jeton d&rsquo;acc&egrave;s (token)</label>
+      <input type="password" id="in-token" placeholder="github_pat_&hellip;" autocomplete="off">
+      <div class="grid2">
+        <div><label>Choisir un mot de passe</label><input type="password" id="in-newpass" placeholder="Au moins 6 caract&egrave;res" autocomplete="new-password"></div>
+        <div><label>Confirmer</label><input type="password" id="in-newpass2" placeholder="R&eacute;p&eacute;ter le mot de passe" autocomplete="new-password"></div>
+      </div>
+      <label style="text-transform:none;letter-spacing:0;display:flex;align-items:center;gap:0.5rem;margin-top:1rem;">
+        <input type="checkbox" id="in-remember" style="width:auto;" checked> Retenir cet acc&egrave;s sur cet appareil (recommand&eacute;)
+      </label>
+      <button class="btn" id="btn-login">Se connecter</button>
+      <p class="hint" id="login-err" style="color:#a33;"></p>
+    </div>
   </div>
 
   <!-- ================= APP ================= -->
   <div id="app-view" class="hidden">
     <div class="tabs">
       <button class="tab active" data-tab="infos">Infos pratiques</button>
+      <button class="tab" data-tab="textes">Textes des pages</button>
       <button class="tab" data-tab="actus">Actualités</button>
       <button class="tab" data-tab="produits">Boutique</button>
       <button class="tab" data-tab="avis">Avis clients</button>
@@ -117,6 +136,22 @@
         <div><label>Message &laquo;&nbsp;coming soon&nbsp;&raquo; (EN)</label><input type="text" id="s-rub-msg-en"></div>
       </div>
       <button class="btn" id="save-infos">Enregistrer les infos</button>
+    </div>
+
+    <!-- ---- Textes des pages ---- -->
+    <div class="card tab-pane hidden" id="pane-textes">
+      <h3>Textes des pages</h3>
+      <p class="hint">Modifiez ici les textes de chaque rubrique du site. Le fran&ccedil;ais est celui que voient la plupart des visiteurs&nbsp;; l&rsquo;anglais s&rsquo;affiche sur la version EN. Laissez vide pour conserver le texte actuel.</p>
+      <label>Rubrique</label>
+      <select id="txt-page">
+        <option value="accueil">Accueil</option>
+        <option value="cafe">Franquette Caf&eacute;</option>
+        <option value="restaurant">Franquette Restaurant</option>
+        <option value="ateliers">Ateliers c&eacute;ramique</option>
+        <option value="boutique">Boutique</option>
+      </select>
+      <div id="txt-champs" style="margin-top:1.2rem;"></div>
+      <button class="btn" id="save-textes">Enregistrer les textes</button>
     </div>
 
     <!-- ---- Actus ---- -->
@@ -235,6 +270,7 @@
   const API = 'https://api.github.com';
   let AUTH = null; // {owner, repo, token}
   let SITE = null, ACTUS = [], PRODUITS = [], AVIS = null;
+  let TEXTES = {};
   let SHAS = {};   // path -> sha
   let editActu = null, editProd = null, editAvis = null;
 
@@ -299,48 +335,160 @@
   });
 
   // ---------- Connexion ----------
-  const tryLogin = async (owner, repo, token, remember, silent) => {
+  // Le jeton GitHub est chiffré (AES-GCM, clé dérivée du mot de passe par PBKDF2)
+  // et conservé uniquement dans ce navigateur. Le site publié n'en contient jamais.
+  const enc = new TextEncoder(), dec = new TextDecoder();
+  const b64 = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)));
+  const unb64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+
+  async function derive(pass, salt) {
+    const base = await crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt, iterations: 250000, hash: 'SHA-256' },
+      base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']
+    );
+  }
+
+  async function encryptToken(token, pass) {
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const key = await derive(pass, salt);
+    const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(token));
+    return { salt: b64(salt), iv: b64(iv), ct: b64(ct) };
+  }
+
+  async function decryptToken(box, pass) {
+    const key = await derive(pass, unb64(box.salt));
+    const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(box.iv) }, key, unb64(box.ct));
+    return dec.decode(pt);
+  }
+
+  const VAULT = 'fq_admin_vault';
+
+  const enterApp = async (owner, repo) => {
+    $('login-view').classList.add('hidden');
+    $('app-view').classList.remove('hidden');
+    $('logout').classList.remove('hidden');
+    $('backup-history').href = 'https://github.com/' + owner + '/' + repo + '/commits/main';
+    await reloadAll();
+    status('Connecté ✓');
+  };
+
+  const checkToken = async (owner, repo, token) => {
     AUTH = { owner, repo, token };
+    const r = await gh('/repos/' + owner + '/' + repo);
+    if (!r.permissions || !r.permissions.push) throw new Error('Ce jeton n’a pas les droits d’écriture sur le dépôt.');
+  };
+
+  // Première connexion : jeton + création du mot de passe
+  $('btn-login').addEventListener('click', async () => {
+    $('login-err').textContent = '';
+    const owner = $('in-owner').value.trim(), repo = $('in-repo').value.trim();
+    const token = $('in-token').value.trim();
+    const p1 = $('in-newpass').value, p2 = $('in-newpass2').value;
+    if (!token) { $('login-err').textContent = 'Merci de coller votre jeton d’accès.'; return; }
+    if (p1.length < 6) { $('login-err').textContent = 'Le mot de passe doit faire au moins 6 caractères.'; return; }
+    if (p1 !== p2) { $('login-err').textContent = 'Les deux mots de passe ne correspondent pas.'; return; }
     try {
-      const r = await gh('/repos/' + owner + '/' + repo);
-      if (!r.permissions || !r.permissions.push) throw new Error('Ce jeton n’a pas les droits d’écriture sur le dépôt.');
-      const store = remember ? localStorage : sessionStorage;
-      store.setItem('fq_admin', JSON.stringify({ owner, repo, token }));
-      $('login-view').classList.add('hidden');
-      $('app-view').classList.remove('hidden');
-      $('logout').classList.remove('hidden');
-      $('backup-history').href = 'https://github.com/' + owner + '/' + repo + '/commits/main';
-      await reloadAll();
-      status('Connecté ✓');
+      await checkToken(owner, repo, token);
+      const box = await encryptToken(token, p1);
+      const store = $('in-remember').checked ? localStorage : sessionStorage;
+      store.setItem(VAULT, JSON.stringify(Object.assign({ owner, repo }, box)));
+      await enterApp(owner, repo);
     } catch (e) {
       AUTH = null;
-      if (!silent) $('login-err').textContent = 'Connexion impossible : ' + e.message;
+      $('login-err').textContent = 'Connexion impossible : ' + e.message;
+    }
+  });
+
+  // Connexions suivantes : mot de passe seul
+  const unlock = async () => {
+    $('quick-err').textContent = '';
+    const raw = localStorage.getItem(VAULT) || sessionStorage.getItem(VAULT);
+    if (!raw) return;
+    const v = JSON.parse(raw);
+    try {
+      const token = await decryptToken(v, $('in-pass').value);
+      await checkToken(v.owner, v.repo, token);
+      await enterApp(v.owner, v.repo);
+    } catch (e) {
+      AUTH = null;
+      $('quick-err').textContent = /decrypt|operation-specific/i.test(e.message || '')
+        ? 'Mot de passe incorrect.'
+        : 'Connexion impossible : ' + e.message;
     }
   };
 
-  $('btn-login').addEventListener('click', () => {
-    $('login-err').textContent = '';
-    tryLogin($('in-owner').value.trim(), $('in-repo').value.trim(), $('in-token').value.trim(), $('in-remember').checked, false);
-  });
+  $('btn-unlock').addEventListener('click', unlock);
+  $('in-pass').addEventListener('keydown', (e) => { if (e.key === 'Enter') unlock(); });
 
-  $('logout').addEventListener('click', () => {
-    localStorage.removeItem('fq_admin');
-    sessionStorage.removeItem('fq_admin');
+  $('link-reset').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!confirm('Oublier l’accès enregistré sur cet appareil ? Il faudra recoller le jeton GitHub.')) return;
+    localStorage.removeItem(VAULT); sessionStorage.removeItem(VAULT);
     location.reload();
   });
 
-  const saved = sessionStorage.getItem('fq_admin') || localStorage.getItem('fq_admin');
-  if (saved) {
-    const s = JSON.parse(saved);
-    tryLogin(s.owner, s.repo, s.token, !!localStorage.getItem('fq_admin'), true);
+  $('logout').addEventListener('click', () => {
+    // On garde le coffre chiffré : la prochaine fois, le mot de passe suffira.
+    AUTH = null;
+    location.reload();
+  });
+
+  // Au chargement : coffre présent -> mot de passe ; sinon -> écran complet
+  (function initLogin() {
+    // Migration depuis l'ancien format (jeton en clair)
+    const legacy = localStorage.getItem('fq_admin') || sessionStorage.getItem('fq_admin');
+    if (legacy && !localStorage.getItem(VAULT) && !sessionStorage.getItem(VAULT)) {
+      try {
+        const s = JSON.parse(legacy);
+        $('in-owner').value = s.owner; $('in-repo').value = s.repo; $('in-token').value = s.token;
+        $('login-err').textContent = 'Votre accès a été retrouvé : choisissez un mot de passe pour ne plus avoir à saisir le jeton.';
+        $('login-err').style.color = '#4A3A2F';
+      } catch (e) { /* ignore */ }
+      localStorage.removeItem('fq_admin'); sessionStorage.removeItem('fq_admin');
+      return;
+    }
+    if (localStorage.getItem(VAULT) || sessionStorage.getItem(VAULT)) {
+      $('login-full').classList.add('hidden');
+      $('login-quick').classList.remove('hidden');
+      setTimeout(() => $('in-pass').focus(), 100);
+    }
+  })();
+
+  // ---------- Textes des pages ----------
+  function renderTextes() {
+    const page = $('txt-page').value;
+    const cles = Object.keys(TEXTES).filter((k) => k.startsWith(page + '.'));
+    $('txt-champs').innerHTML = cles.map((k) => {
+      const t = TEXTES[k];
+      const lab = (t.label || k).replace(/^[^—]*—\s*/, '');
+      const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      return '<div style="border-top:1px dashed #ddd2c2;padding-top:0.8rem;margin-top:0.8rem;">' +
+        '<label style="text-transform:none;letter-spacing:0;font-size:0.85rem;">' + esc(lab) + '</label>' +
+        '<div class="grid2">' +
+        '<div><label style="font-size:0.7rem;">Fran&ccedil;ais</label><textarea data-tk="' + k + '" data-tl="fr">' + esc(t.fr) + '</textarea></div>' +
+        '<div><label style="font-size:0.7rem;">Anglais</label><textarea data-tk="' + k + '" data-tl="en">' + esc(t.en) + '</textarea></div>' +
+        '</div></div>';
+    }).join('') || '<p class="hint">Aucun texte modifiable sur cette rubrique.</p>';
   }
+
+  $('txt-page').addEventListener('change', renderTextes);
+
+  $('save-textes').addEventListener('click', async () => {
+    $('txt-champs').querySelectorAll('textarea[data-tk]').forEach((ta) => {
+      const k = ta.dataset.tk, l = ta.dataset.tl;
+      if (TEXTES[k]) TEXTES[k][l] = ta.value;
+    });
+    try { await saveFile('data/textes.json', TEXTES, 'textes des pages'); } catch (e) { status(e.message, true); }
+  });
 
   // ---------- Chargement ----------
   async function reloadAll() {
-    [SITE, ACTUS, PRODUITS, AVIS] = await Promise.all([
-      loadFile('data/site.json'), loadFile('data/actus.json'), loadFile('data/produits.json'), loadFile('data/avis.json')
+    [SITE, ACTUS, PRODUITS, AVIS, TEXTES] = await Promise.all([
+      loadFile('data/site.json'), loadFile('data/actus.json'), loadFile('data/produits.json'), loadFile('data/avis.json'), loadFile('data/textes.json')
     ]);
-    fillInfos(); renderActus(); renderProduits(); fillAvisMeta(); renderAvis();
+    fillInfos(); renderActus(); renderProduits(); fillAvisMeta(); renderAvis(); renderTextes();
   }
 
   // ---------- Onglets ----------
@@ -577,7 +725,7 @@
       await saveFile('data/actus.json', ACTUS, 'restauration sauvegarde (actus)');
       await saveFile('data/produits.json', PRODUITS, 'restauration sauvegarde (produits)');
       if (data.avis) await saveFile('data/avis.json', AVIS, 'restauration sauvegarde (avis)');
-      fillInfos(); renderActus(); renderProduits(); fillAvisMeta(); renderAvis();
+      fillInfos(); renderActus(); renderProduits(); fillAvisMeta(); renderAvis(); renderTextes();
       status('Sauvegarde restaurée ✓');
     } catch (e) { status(e.message, true); }
   });

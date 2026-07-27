@@ -1,0 +1,157 @@
+{
+  "accueil.tagline": {
+    "label": "Accueil — sous-titre de la photo",
+    "fr": "Café &middot; Restaurant &middot; Ateliers céramique &middot; Boutique<br>8 rue des Dames, Paris 17e",
+    "en": "Café &middot; Restaurant &middot; Ceramics workshops &middot; Shop<br>8 rue des Dames, Paris 17th"
+  },
+  "accueil.univers_titre": {
+    "label": "Accueil — titre « Un lieu, quatre envies »",
+    "fr": "Un lieu, quatre envies",
+    "en": "One place, four cravings"
+  },
+  "accueil.univers_intro": {
+    "label": "Accueil — texte d'introduction",
+    "fr": "Ancienne boutique de bonbons devenue cabinet de curiosités, Franquette vit du matin au soir : café méditerranéen la journée, tapas à la française le soir, terre et céramique entre les deux.",
+    "en": "A former candy shop turned cabinet of curiosities, Franquette lives from morning to night: Mediterranean coffee by day, French tapas in the evening, clay and ceramics in between."
+  },
+  "accueil.carte_cafe_titre": {
+    "label": "Accueil — carte cafe : titre",
+    "fr": "Franquette Café",
+    "en": "Franquette Café"
+  },
+  "accueil.carte_cafe_desc": {
+    "label": "Accueil — carte cafe : description",
+    "fr": "Coffee shop méditerranéen &middot; Mar-Sam 8h30&ndash;17h30",
+    "en": "Mediterranean coffee shop &middot; Tue&ndash;Sat 8:30am&ndash;5:30pm"
+  },
+  "accueil.carte_restaurant_titre": {
+    "label": "Accueil — carte restaurant : titre",
+    "fr": "Franquette Restaurant",
+    "en": "Franquette Restaurant"
+  },
+  "accueil.carte_restaurant_desc": {
+    "label": "Accueil — carte restaurant : description",
+    "fr": "Tapas à la française &amp; vins nature &middot; le soir",
+    "en": "French tapas &amp; natural wines &middot; evenings"
+  },
+  "accueil.carte_ateliers_titre": {
+    "label": "Accueil — carte ateliers : titre",
+    "fr": "Ateliers Céramique",
+    "en": "Ceramics Workshops"
+  },
+  "accueil.carte_ateliers_desc": {
+    "label": "Accueil — carte ateliers : description",
+    "fr": "Mettre les mains dans la terre",
+    "en": "Get your hands in the clay"
+  },
+  "accueil.carte_boutique_titre": {
+    "label": "Accueil — carte boutique : titre",
+    "fr": "Boutique",
+    "en": "Shop"
+  },
+  "accueil.carte_boutique_desc": {
+    "label": "Accueil — carte boutique : description",
+    "fr": "Vins, céramiques, huile &amp; café d&rsquo;exception",
+    "en": "Wines, ceramics, exceptional oil &amp; coffee"
+  },
+  "accueil.esprit_titre": {
+    "label": "Accueil — titre « L'esprit Franquette »",
+    "fr": "L&rsquo;esprit Franquette",
+    "en": "The Franquette spirit"
+  },
+  "accueil.esprit_p1": {
+    "label": "Accueil — esprit, 1er paragraphe",
+    "fr": "Chez Franquette, on choisit des produits <strong>bons, propres et justes",
+    "en": "At Franquette, we choose products that are <strong>good, clean and fair"
+  },
+  "accueil.esprit_p2": {
+    "label": "Accueil — esprit, 2e paragraphe",
+    "fr": "Le matin, l&rsquo;odeur du café fraîchement moulu. Le midi, une pause salée-sucrée au soleil. L&rsquo;après-midi, la terre qui tourne à l&rsquo;atelier. Le soir, les tapas cosmopolites et les vins nature. À la bonne franquette, toujours.",
+    "en": "In the morning, the smell of freshly ground coffee. At noon, a sweet-and-savoury break in the sun. In the afternoon, clay spinning at the workshop. In the evening, cosmopolitan tapas and natural wines. Always &ldquo;à la bonne franquette&rdquo;."
+  },
+  "cafe.tagline": {
+    "label": "Café — sous-titre de la photo",
+    "fr": "Coffee shop méditerranéen &middot; mardi&ndash;samedi 8h30 &ndash; 17h30",
+    "en": "Mediterranean coffee shop &middot; Tuesday&ndash;Saturday 8:30am &ndash; 5:30pm"
+  },
+  "cafe.presentation_titre": {
+    "label": "Café — titre de présentation",
+    "fr": "Le soleil en terrasse de comptoir",
+    "en": "Sunshine at the counter"
+  },
+  "cafe.presentation_p1": {
+    "label": "Café — présentation, 1er paragraphe",
+    "fr": "La journée, Franquette devient un coffee shop aux accents méditerranéens. Des cafés de qualité, en grains sélectionnés auprès de torréfacteurs de renom, préparés avec soin&nbsp;: espresso, latte, cappuccino, flat white.",
+    "en": "By day, Franquette becomes a coffee shop with Mediterranean accents. Quality coffees, beans selected from renowned roasters, brewed with care: espresso, latte, cappuccino, flat white."
+  },
+  "cafe.presentation_p2": {
+    "label": "Café — présentation, 2e paragraphe",
+    "fr": "Pour les becs verts et sucrés&nbsp;: matcha, sodas artisanaux UMA, et une carte salée-sucrée à grignoter à toute heure, entre focaccia, douceurs et fruits gorgés de soleil.",
+    "en": "For green and sweet tooths: matcha, UMA craft sodas, and a sweet-and-savoury snacking menu to enjoy at any hour — focaccia, treats and sun-drenched fruit."
+  },
+  "restaurant.tagline": {
+    "label": "Restaurant — sous-titre de la photo",
+    "fr": "Tapas à la française &middot; vins nature &amp; orange &middot; mardi&ndash;samedi 19h30&ndash;23h",
+    "en": "French tapas &middot; natural &amp; orange wines &middot; Tuesday&ndash;Saturday 7:30&ndash;11pm"
+  },
+  "restaurant.presentation_titre": {
+    "label": "Restaurant — titre de présentation",
+    "fr": "Des tapas à la française",
+    "en": "French-style tapas"
+  },
+  "restaurant.presentation_p1": {
+    "label": "Restaurant — présentation, 1er paragraphe",
+    "fr": "Dans une ancienne boutique de bonbons devenue cabinet de curiosités, à 100&nbsp;mètres de la place de Clichy, Franquette imagine des tapas à la française aux accents cosmopolites&nbsp;: des produits <strong>bons, propres et justes",
+    "en": "In a former candy shop turned cabinet of curiosities, 100&nbsp;metres from Place de Clichy, Franquette creates French-style tapas with cosmopolitan accents: products that are <strong>good, clean and fair"
+  },
+  "restaurant.presentation_p2": {
+    "label": "Restaurant — présentation, 2e paragraphe",
+    "fr": "À la cave&nbsp;: vins nature, vins oranges et macérations, jolies bulles et pépites régionales, à partager dans une atmosphère festive.",
+    "en": "In the cellar: natural wines, orange and macerated wines, lovely bubbles and regional gems, to share in a festive atmosphere."
+  },
+  "ateliers.tagline": {
+    "label": "Ateliers — sous-titre de la photo",
+    "fr": "Mettre les mains dans la terre, rue des Dames",
+    "en": "Get your hands in the clay, rue des Dames"
+  },
+  "ateliers.presentation_titre": {
+    "label": "Ateliers — titre de présentation",
+    "fr": "La terre, le geste, la table",
+    "en": "The clay, the gesture, the table"
+  },
+  "ateliers.presentation_p1": {
+    "label": "Ateliers — présentation, 1er paragraphe",
+    "fr": "Chez Franquette, la céramique prolonge naturellement l&rsquo;assiette&nbsp;: les pièces façonnées à l&rsquo;atelier finissent sur les tables du restaurant et dans la boutique.",
+    "en": "At Franquette, ceramics are a natural extension of the plate: pieces shaped at the workshop end up on the restaurant&rsquo;s tables and in the shop."
+  },
+  "ateliers.presentation_p2": {
+    "label": "Ateliers — présentation, 2e paragraphe",
+    "fr": "En petits groupes, venez vous initier au modelage et au tournage avec Marie, notre céramiste, autour d&rsquo;un café. Aucun prérequis&nbsp;: juste l&rsquo;envie de repartir avec une pièce à vous.",
+    "en": "In small groups, come and learn hand-building and wheel throwing with Marie, our ceramicist, over a coffee. No experience needed — just the desire to leave with a piece of your own."
+  },
+  "ateliers.presentation_p3": {
+    "label": "Ateliers — présentation, 3e paragraphe (en pratique)",
+    "fr": "<strong>En pratique&nbsp;:",
+    "en": "<strong>In practice:"
+  },
+  "ateliers.reservation_note": {
+    "label": "Ateliers — encadré « comment réserver »",
+    "fr": "Pour l&rsquo;instant, les réservations d&rsquo;ateliers se font simplement par e-mail à <a class=\"email-fixe\" href=\"mailto:cafemedco@gmail.com\">cafemedco@gmail.com",
+    "en": "For now, workshop bookings are made simply by email at <a class=\"email-fixe\" href=\"mailto:cafemedco@gmail.com\">cafemedco@gmail.com"
+  },
+  "boutique.tagline": {
+    "label": "Boutique — sous-titre de la photo",
+    "fr": "Emporter un peu de Franquette chez soi",
+    "en": "Take a little Franquette home"
+  },
+  "boutique.intro_titre": {
+    "label": "Boutique — titre d'introduction",
+    "fr": "Retrouver la carte Franquette",
+    "en": "The Franquette selection"
+  },
+  "boutique.intro": {
+    "label": "Boutique — texte d'introduction",
+    "fr": "Tout ce que vous aimez à table, à rapporter à la maison&nbsp;: les vins de la cave, les céramiques de l&rsquo;atelier, et nos produits d&rsquo;exception.",
+    "en": "Everything you love at the table, to take home: wines from the cellar, ceramics from the workshop, and our exceptional products."
+  }
+}
